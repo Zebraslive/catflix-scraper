@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "tsc && node dist/src/impl.js",
+    "start": "node src/impl.js",
     "test": "vitest ./test/"
   },
   "keywords": [],
@@ -16,7 +16,6 @@
     "cheerio": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.2",
     "vitest": "^3.0.4"
   }
 }

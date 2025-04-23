@@ -2,14 +2,14 @@ import * as cheerio from "cheerio";
 import { decryptHexWithKey } from "./decrypt.js";
 import { fetchTurbovid } from "./util.js";
 
-async function cheerio_setup(url: string) {
+async function cheerio_setup(url) {
     if (!URL.canParse(url)) return null;
     const html = await fetch(url);
 
     return cheerio.load(await html.text());
 }
 
-export async function getEmbedURL(targetURL: string) {
+export async function getEmbedURL(targetURL) {
     const $ = await cheerio_setup(targetURL);
     if (!$) throw new Error(`Failed to setup cheerio for ${targetURL}!`);
     const catflix_data = $("script").last().html()!;
@@ -22,7 +22,7 @@ export async function getEmbedURL(targetURL: string) {
     return atob(match[1]);
 }
 
-export async function getEmbedInfo(embed_url: string) {
+export async function getEmbedInfo(embed_url) {
     const $ = await cheerio_setup(embed_url);
     if (!$) throw new Error(`Failed to setup cheerio for ${embed_url}!`);
     const embed_data = $("body > script").html();
@@ -34,7 +34,7 @@ export async function getEmbedInfo(embed_url: string) {
     }
 }
 
-export async function getJuiceData(apkey: string, xxid: string): Promise<JuiceData | null> {
+export async function getJuiceData(apkey, xxid) {
     const res = await Promise.all([
         fetchTurbovid("https://turbovid.eu/api/cucked/juice_key", true),
         fetchTurbovid(`https://turbovid.eu/api/cucked/the_juice/?${apkey}=${xxid}`, true)
@@ -51,6 +51,6 @@ export async function getJuiceData(apkey: string, xxid: string): Promise<JuiceDa
     }
 }
 
-export async function decryptStreamURL(juice_info: JuiceData) {
+export async function decryptStreamURL(juice_info) {
     return decryptHexWithKey(juice_info.the_juice, juice_info.juice_key);
 }
