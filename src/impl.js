@@ -4,10 +4,10 @@ import { getEmbedURL, getEmbedInfo, getJuiceData, decryptStreamURL } from "./ind
 import { saveToFile } from "./util.js";
 
 const logger = {
-    info: (str: string) => {
+    info: (str) => {
         console.log(chalk.grey.bold(str));
     },
-    success: (str: string) => {
+    success: (str) => {
         console.log(chalk.green.bold(str))
     },
 };
@@ -17,7 +17,7 @@ const flags = {
     targetURL: ""
 };
 
-function parseArgv(argv: string[]) {
+function parseArgv(argv) {
     let urlFound = false;
     argv.forEach((val) => {
         if (URL.canParse(val) && !urlFound) {
@@ -36,7 +36,7 @@ function parseArgv(argv: string[]) {
     }
 }
 
-async function saveM3U8ToFile(m3u8_url: string) {
+async function saveM3U8ToFile(m3u8_url) {
     const base_m3u8 = m3u8_url.split("uwu.m3u8")[0];
     const m3u8_data = await saveToFile(m3u8_url, base_m3u8);
     

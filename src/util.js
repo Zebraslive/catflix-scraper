@@ -2,7 +2,7 @@ import chalk from "chalk";
 
 const TURBOVID_REFERER = "https://turbovid.eu";
 
-export async function saveToFile(m3u8_url: string, base_m3u8: string) {
+export async function saveToFile(m3u8_url, base_m3u8) {
     let m3u8_data = await (await fetch(m3u8_url, {
         headers: {
             referer: "https://turbovid.eu/"
@@ -16,7 +16,7 @@ export async function saveToFile(m3u8_url: string, base_m3u8: string) {
     return m3u8_data;
 }
 
-export async function fetchTurbovid(url: string, json: boolean = false): Promise<turbovidResponse | null> {
+export async function fetchTurbovid(url, json = false) {
     const res = await (await fetch(url, {
         headers: {
             referer: TURBOVID_REFERER
